@@ -9,3 +9,5 @@ vendor
 venv
 **/DS_Store/*
 **/.DS_Store/*
+/out/production/gildedRose/com/gildedrose/GildedRose.class
+/out/production/gildedRose/com/gildedrose/Item.class
