@@ -4,6 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 class GildedRose {
+
+    protected static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
+    protected static final String AGED = "Aged Brie";
+    protected static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+    protected static final String CONJURED = "Conjured Mana Cake";
+    protected static final List<String> LIST_B_A_S = List.of(BACKSTAGE, AGED, SULFURAS);
+
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -12,83 +20,23 @@ class GildedRose {
 
 
     public void updateQuality() {
-        updateQualityNew();
-    }
-
-    public void updateQualityOld() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
-
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-            }
-        }
-    }
-
-
-
-
-
-    protected static final String BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
-    protected static final String AGED = "Aged Brie";
-    protected static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
-
-
-    public void updateQualityNew() {
 
         Arrays.stream(items)
-            .filter(item -> !List.of(BACKSTAGE, AGED, SULFURAS).contains(item.name))
+            .filter(item -> !LIST_B_A_S.contains(item.name))
             .filter(item -> item.quality > 0)
+            .peek(item -> item.quality--)
+            .filter(item -> CONJURED.equals(item.name))
             .forEach(item -> item.quality--);
 
         Arrays.stream(items)
+            .filter(item -> LIST_B_A_S.contains(item.name))
             .filter(item -> item.quality < 50)
             .peek(item -> item.quality++)
             .filter(item -> BACKSTAGE.equals(item.name))
             .filter(item -> item.sellIn < 11)
+            .filter(item -> item.quality < 50)
+            .peek(item -> item.quality++)
+            .filter(item -> item.sellIn < 6)
             .filter(item -> item.quality < 50)
             .forEach(item -> item.quality++);
 
@@ -108,6 +56,9 @@ class GildedRose {
             item.quality = 0;
         } else if (!List.of(SULFURAS, AGED).contains(item.name) && item.quality > 0) {
             item.quality--;
+            if (CONJURED.equals(item.name) && item.quality > 0) {
+                item.quality--;
+            }
         }
     }
 
