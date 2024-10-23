@@ -11,3 +11,5 @@ venv
 **/.DS_Store/*
 /out/production/gildedRose/com/gildedrose/GildedRose.class
 /out/production/gildedRose/com/gildedrose/Item.class
+/out/test/gildedRose/com/gildedrose/GildedRoseTest.class
+/out/test/gildedRose/com/gildedrose/TexttestFixture.class
