@@ -49,7 +49,7 @@ class GildedRose {
             .forEach(this::alterQuality);
     }
 
-    protected void alterQuality(Item item) {
+    public void alterQuality(Item item) {
         if (AGED.equals(item.name) && item.quality < 50) {
             item.quality++;
         } else if (BACKSTAGE.equals(item.name)) {

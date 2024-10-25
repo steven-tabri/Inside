@@ -15,14 +15,13 @@ class GildedRoseTest {
             new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20), //
             new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49), //
             new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49), //
-            // this conjured item does not work properly yet
             new Item("Conjured Mana Cake", 3, 6) };
     }
 
     @Test
     void test2Days() {
 
-        GildedRose app = new GildedRose(getItems());
+        final GildedRose app = new GildedRose(getItems());
 
         for (int i = 0; i < 2; i++) {
             app.updateQuality();
@@ -61,7 +60,7 @@ class GildedRoseTest {
     @Test
     void test11Days() {
 
-        GildedRose app = new GildedRose(getItems());
+        final GildedRose app = new GildedRose(getItems());
 
         for (int i = 0; i < 11; i++) {
             app.updateQuality();
@@ -100,7 +99,7 @@ class GildedRoseTest {
     @Test
     void test30Days() {
 
-        GildedRose app = new GildedRose(getItems());
+        final GildedRose app = new GildedRose(getItems());
 
         for (int i = 0; i < 30; i++) {
             app.updateQuality();
@@ -135,4 +134,62 @@ class GildedRoseTest {
         assertEquals(0, app.items[8].quality);
     }
 
+    @Test
+    void testAlter1() {
+
+        final GildedRose app = new GildedRose(getItems());
+
+        final Item item = new Item("+5 Dexterity Vest", 10, 20);
+        app.alterQuality(item);
+        assertEquals(19, item.quality);
+        final Item item2 = new Item("+5 Dexterity Vest", 10, -20);
+        app.alterQuality(item2);
+        assertEquals(-20, item2.quality);
+    }
+
+    @Test
+    void testAlter2() {
+
+        final GildedRose app = new GildedRose(getItems());
+
+        final Item item = new Item("Aged Brie", 2, 0);
+        app.alterQuality(item);
+        assertEquals(1, item.quality);
+        final Item item2 = new Item("Aged Brie", 2, 50);
+        app.alterQuality(item2);
+        assertEquals(50, item2.quality);
+    }
+
+    @Test
+    void testAlter3() {
+
+        final GildedRose app = new GildedRose(getItems());
+
+        final Item item = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
+        app.alterQuality(item);
+        assertEquals(80, item.quality);
+    }
+
+    @Test
+    void testAlter4() {
+
+        final GildedRose app = new GildedRose(getItems());
+
+        final Item item = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20);
+        app.alterQuality(item);
+        assertEquals(0, item.quality);
+    }
+
+    @Test
+    void testAlter5() {
+
+        final GildedRose app = new GildedRose(getItems());
+
+        final Item item = new Item("Conjured Mana Cake", 3, 6);
+        app.alterQuality(item);
+        assertEquals(4, item.quality);
+        final Item item2 = new Item("Conjured Mana Cake", 3, 0);
+        app.alterQuality(item2);
+        assertEquals(0, item2.quality);
+    }
 }
