@@ -9,3 +9,16 @@ vendor
 venv
 **/DS_Store/*
 **/.DS_Store/*
+/out/production/gildedRose/com/gildedrose/AbsItemEnhanced.class
+/out/production/gildedRose/com/gildedrose/EItemName.class
+/out/production/gildedRose/com/gildedrose/GildedRose.class
+/out/production/gildedRose/com/gildedrose/Item.class
+/out/production/gildedRose/com/gildedrose/ItemBackstage.class
+/out/production/gildedRose/com/gildedrose/ItemBrie.class
+/out/production/gildedRose/com/gildedrose/ItemGeneric.class
+/out/production/gildedRose/com/gildedrose/ItemSulfuras.class
+/out/production/gildedRose/com/gildedrose/Updatable.class
+/out/production/gildedRose/com/gildedrose/UpdatableFactory$1.class
+/out/production/gildedRose/com/gildedrose/UpdatableFactory.class
+/out/test/gildedRose/com/gildedrose/GildedRoseTest.class
+/out/test/gildedRose/com/gildedrose/TexttestFixture.class
